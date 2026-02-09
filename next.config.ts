@@ -1,7 +1,22 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  // Configurações de imagens (que você provavelmente já tem para o Blob/Unsplash)
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**', // Permite imagens externas (Blob, Unsplash, etc)
+      },
+    ],
+  },
+  
+  // --- ADICIONE ESTA PARTE ---
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '50mb', // Aumenta o limite para 50 MegaBytes
+    },
+  },
+  // ---------------------------
 };
 
 export default nextConfig;

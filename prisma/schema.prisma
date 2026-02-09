@@ -1,0 +1,109 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+
+// --- AUTENTICAÇÃO E USUÁRIOS ---
+
+enum Role {
+  DEVELOPER    // O "Master" - Acesso total
+  ADMIN        // Gerencia conteúdo, mas não altera o Developer
+  EMPLOYEE     // Acesso limitado (opcional)
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String
+  email         String    @unique
+  password      String    // Hashed password para NextAuth
+  phone         String?
+  image         String?   // Foto de perfil (URL do Blob)
+  role          Role      @default(ADMIN)
+  
+  // Notificações enviadas por este usuário
+  sentNotifications Notification[]
+
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// --- CONTEÚDO (PORTFÓLIO) ---
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique // Nome interno/Menu (ex: "Cozinha")
+  slug        String    @unique // URL (ex: "cozinha")
+  
+  // Novos campos para a página pública
+  title       String?   // Título H1 da página (ex: "Cozinhas Planejadas Modernas")
+  description String?   @db.Text // Texto introdutório
+  imageUrl    String?   // Capa da categoria
+  isExternal  Boolean   @default(false) // Se a imagem é link externo ou upload
+  
+  projects    Project[]
+  
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+}
+
+model Project {
+  id          String   @id @default(cuid())
+  title       String   // Nome interno/Menu
+  slug        String   @unique
+  
+  // --- NOVOS CAMPOS SOLICITADOS ---
+  h1Title     String   // Título Principal da Página
+  location    String?  // Bairro, Cidade, Estado
+  
+  shortDesc   String   @db.VarChar(255) // Para os cards
+  
+  h2Title     String?  // Título da seção de descrição
+  description String   @db.Text // Texto completo
+  
+  colorPalette String? // Texto descritivo das cores
+  
+  // Ficha técnica: Array de objetos { title: string, description: string }
+  // Exemplo: [{"title": "Material", "description": "MDF Ultra"}, ...]
+  techSpecs   Json?    
+  
+  isFeatured  Boolean  @default(false)
+
+  // Relacionamentos
+  categoryId  String
+  category    Category @relation(fields: [categoryId], references: [id])
+  
+  images      ProjectImage[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+model ProjectImage {
+  id          String   @id @default(cuid())
+  url         String   // URL do Blob ou Link Externo
+  isExternal  Boolean  @default(false)
+  
+  projectId   String
+  project     Project  @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  createdAt   DateTime @default(now())
+}
+
+// --- COMUNICAÇÃO ---
+
+model Notification {
+  id        String   @id @default(cuid())
+  title     String
+  message   String   @db.Text
+  
+  // Relacionamento com quem enviou
+  senderId  String
+  sender    User     @relation(fields: [senderId], references: [id])
+
+  createdAt DateTime @default(now())
+}

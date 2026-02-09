@@ -1,26 +1,108 @@
 @import "tailwindcss";
+@plugin "tailwindcss-animate";
+@plugin "@tailwindcss/typography";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    /* Base Colors - #fdfbf7 (Creme/Off-white) */
+    --background: 36 33% 98%; 
+    /* Text Colors - #5c4d3c (Marrom Madeira Escura) */
+    --foreground: 32 21% 30%;
+
+    /* Card Colors */
+    --card: 36 33% 98%;
+    --card-foreground: 32 21% 30%;
+
+    /* Popover Colors */
+    --popover: 36 33% 98%;
+    --popover-foreground: 32 21% 30%;
+
+    /* Primary - #5c4d3c (O Marrom principal do botão/logo) */
+    --primary: 32 21% 30%;
+    --primary-foreground: 36 33% 98%;
+
+    /* Secondary - #efe4cd (Bege médio usado em bordas/detalhes) */
+    --secondary: 41 48% 87%;
+    --secondary-foreground: 32 21% 30%;
+
+    /* Muted - #f7f1e3 (Fundo de seções secundárias) */
+    --muted: 38 43% 93%;
+    --muted-foreground: 32 21% 40%;
+
+    /* Accent - Usado para hovers e destaques sutis */
+    --accent: 41 48% 87%;
+    --accent-foreground: 32 21% 30%;
+
+    /* Destructive - Vermelho padrão mantido, mas suavizado */
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 210 40% 98%;
+
+    /* Borders & Inputs - #efe4cd */
+    --border: 41 48% 87%;
+    --input: 41 48% 87%;
+    --ring: 32 21% 30%; /* Ring com a cor da madeira */
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    /* Modo Escuro (Invertido para manter elegância) */
+    --background: 32 21% 10%; /* Marrom muito escuro */
+    --foreground: 36 33% 98%;
+
+    --card: 32 21% 12%;
+    --card-foreground: 36 33% 98%;
+
+    --popover: 32 21% 12%;
+    --popover-foreground: 36 33% 98%;
+
+    --primary: 36 33% 98%;
+    --primary-foreground: 32 21% 30%;
+
+    --secondary: 32 21% 20%;
+    --secondary-foreground: 36 33% 98%;
+
+    --muted: 32 21% 20%;
+    --muted-foreground: 36 33% 70%;
+
+    --accent: 32 21% 25%;
+    --accent-foreground: 36 33% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 32 21% 25%;
+    --input: 32 21% 25%;
+    --ring: 36 33% 98%;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer base {
+  * {
+    border-color: var(--border); /* USE ISSO */
+    outline-color: var(--border);
+  }
+  body {
+    background-color: var(--background); /* USE ISSO */
+    color: var(--foreground); /* USE ISSO */
+  }
+  
+  /* Utilitários para tipografia elegante */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* Scrollbar personalizada para combinar com o tema */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-[#fdfbf7];
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-[#efe4cd] rounded-full;
+}
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-[#5c4d3c];
 }
