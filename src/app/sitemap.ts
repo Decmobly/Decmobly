@@ -25,7 +25,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Rota: /portfolio/nome-do-projeto
   // CORREÇÃO: Removida a tipagem manual (project: { slug: any... }). 
   // O TypeScript infere automaticamente vindo do prisma.project.
-  const portfolioRoutes = projects.map((project) => ({
+  const portfolioRoutes = projects.map((project: { slug: any; updatedAt: any; }) => ({
     url: `${baseUrl}/portfolio/${project.slug}`,
     lastModified: project.updatedAt,
     changeFrequency: 'weekly' as const,
@@ -33,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   // Rota: /ambientes/cozinha, /ambientes/sala, etc.
-  const environmentRoutes = categories.map((category) => ({
+  const environmentRoutes = categories.map((category: { slug: any; updatedAt: any; }) => ({
     url: `${baseUrl}/ambientes/${category.slug}`,
     lastModified: category.updatedAt,
     changeFrequency: 'monthly' as const,
