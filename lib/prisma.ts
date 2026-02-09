@@ -1,9 +1,7 @@
-import * as PrismaClientPkg from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
-// No Prisma 7, dependendo da config, a exportação pode estar em sub-objetos
-const PrismaClient = (PrismaClientPkg as any).PrismaClient || PrismaClientPkg.PrismaClient;
-
-const globalForPrisma = global as unknown as { prisma: any };
+// 1. Tipamos o global corretamente para aceitar o PrismaClient ou undefined
+const globalForPrisma = global as unknown as { prisma: PrismaClient | undefined };
 
 export const prisma =
   globalForPrisma.prisma ||

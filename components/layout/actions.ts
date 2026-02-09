@@ -9,7 +9,9 @@ export async function getCategoriesForMenu() {
       orderBy: { name: 'asc' },
     });
     return categories;
-  } catch (error) {
+  } catch {
+    // CORREÇÃO: Removemos '(_error)' pois não estava sendo usado.
+    // O catch funciona sem argumentos se você não precisar ler o erro.
     return [];
   }
 }
