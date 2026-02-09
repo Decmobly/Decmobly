@@ -15,6 +15,7 @@ export default function MainLayout({ children }: MainLayoutProps) {
          flex-grow garante que o footer vá para o fundo se o conteúdo for curto
       */}
       <main className="grow">
+        <meta name="google-site-verification" content="6N2GoYbAE12FrUHmCXBDOLqQxoIdzUpiK67ElguwNpo" />
         {children}
       </main>
 
