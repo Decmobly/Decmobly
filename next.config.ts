@@ -13,7 +13,9 @@ const nextConfig = {
   // --- ADICIONE ESTA PARTE ---
   experimental: {
     serverActions: {
-      bodySizeLimit: '50mb', // Aumenta o limite para 50 MegaBytes
+      bodySizeLimit: '50mb', 
+    serverComponentsExternalPackages: ['@prisma/client', 'bcryptjs'], 
+  
     },
   },
   // ---------------------------
