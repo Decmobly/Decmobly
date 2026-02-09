@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import Link from 'next/link';
 import Image from 'next/image'; // 1. Importação do componente Image
 import { prisma } from '@/lib/prisma';
