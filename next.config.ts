@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  serverExternalPackages: ['@prisma/client', 'bcryptjs'],
+  
   // Configurações de imagens (que você provavelmente já tem para o Blob/Unsplash)
   images: {
     remotePatterns: [
