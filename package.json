@@ -1,13 +1,14 @@
 {
   "name": "decmobly",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "license": "MIT",
-  "private": true,
+  "private": false,
   "scripts": {
     "dev": "next dev",
     "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
   },
   "dependencies": {
     "@next-auth/prisma-adapter": "^1.0.7",
@@ -33,11 +34,9 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
     "@tailwindcss/typography": "^0.5.19",
-    "@types/bcrypt": "^6.0.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "bcrypt": "^6.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.6",
     "prisma": "^5.22.0",
