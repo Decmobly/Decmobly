@@ -94,7 +94,7 @@ export default async function HomePage() {
             </div>
             
             <p className="text-lg md:text-xl text-stone-200/90 max-w-2xl mx-auto lg:mx-0 font-light leading-relaxed">
-              Criamos ambientes que unem a precisão tecnológica ao toque artesanal. Sofisticação e funcionalidade em cada milímetro.
+              Projetos que transformam espaços em expreiências únicas. Cada ambiente é planejado com precisão, estética e funcionalidade, refletindo o estilo e as necessidades de cada cliente.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-4">
